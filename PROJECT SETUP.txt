@@ -1,0 +1,9 @@
+In project, we need to put this script on our terminal
+
+php artisan serve --host=localhost --port=44301
+
+yarn install
+
+npm start
+
+https://www.youtube.com/watch?v=inu2_Hj2RJI&list=PLLhM616BHkss3VLQdFqmEOrq0aktOItqC&index=1
