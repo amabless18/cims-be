@@ -55,6 +55,48 @@ class UserController extends Controller
             return response()->json(['message' => 'User not found'], 404);
         }
         $user->update($request->all());
+
+        // Update related Student or Coach record if UserType is changed
+        if ($request->has('userType')) {
+            if ($request->input('userType') === 'student') {
+                $user->students()->updateOrCreate(
+                    ['user_id' => $user->id],
+                    [
+                        'firstname' => $user->firstname,
+                        'middlename' => $user->middlename,
+                        'lastname' => $user->lastname,
+                        'course' => $user->course,
+                        'branch' => $user->branch,
+                        'status' => $user->status,
+                        // Add other fields for Student model as needed
+                    ]
+                    // Add other fields for Student model as needed
+                );
+
+                $checkStudent = $user->load('students');
+
+                return response()->json($checkStudent);
+
+            } elseif ($request->input('userType') === 'coach') {
+                $user->coaches()->updateOrCreate(
+                    ['user_id' => $user->id],
+                    [
+                        'firstname' => $user->firstname,
+                        'middlename' => $user->middlename,
+                        'lastname' => $user->lastname,
+                        'course' => $user->course,
+                        'branch' => $user->branch,
+                        'status' => $user->status,
+                        // Add other fields for Student model as needed
+                    ]
+                    // Add other fields for Coach model as needed
+                );
+
+                $checkCoach = $user->load('coaches');
+
+                return response()->json($checkCoach);
+            }
+        }
         return response($user, 200);
     }
 

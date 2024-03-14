@@ -5,11 +5,34 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Coach;
+use App\Models\Student;
+
 
 class CoachController extends Controller
 {   
     public function index(){
         return response()->json(Coach::all(), 200);
+    }
+
+    public function assignStudent(Request $request, $coachId, $studentId) {
+        $coach = Coach::findOrFail($coachId);
+        $student = Student::findOrFail($studentId);
+
+        $coach->students()->attach($student);
+
+        $student->coaches()->syncWithoutDetaching([$coach->id]);
+
+        $coaches = $coach->load('students');
+
+        return response()->json($coaches);
+    }
+
+    public function coachwithStudents(Coach $coach, $coachId) {
+        $coach = Coach::findOrFail($coachId);
+
+        $coaches = $coach->load('students');
+
+        return response()->json($coaches);
     }
 
 

@@ -116,11 +116,12 @@ Route::prefix('users')->group(function() {
 });
 
 
-Route::prefix('userstest')->group(function () {
-  Route::post('/', [AppController::class, 'create']); // Create a new user
+Route::prefix('userappointment')->group(function () {
+  //  Route::get('/users', [AppController::class, 'index']); // Create a new user
+  // Route::post('/', [AppController::class, 'create']); // Create a new user
   Route::get('/{id}', [AppController::class, 'show']); // Read a user
   Route::put('/{id}', [AppController::class, 'update']); // Update a user
-  Route::delete('/{id}', [AppController::class, 'destroy']); // Delete a user
+  // Route::delete('/{id}', [AppController::class, 'destroy']); // Delete a user
 });
 
 //Assigned Student to Coach

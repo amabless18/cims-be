@@ -32,6 +32,14 @@ class StudentController extends Controller
         return response()->json(Student::find($id), 200);
     }
 
+    public function studentwithCoach(Student $student, $studentId) {
+        $student = Student::findOrFail($studentId);
+
+        $students = $student->load('coaches');
+
+        return response()->json($students);
+    }
+
 
     public function update(Request $request, $id)
     {
