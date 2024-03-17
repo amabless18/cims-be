@@ -134,5 +134,7 @@ Route::get('students/{studentId}/coaches  ', [StudentController::class, 'student
 Route::get('coaches/{coachId}/students', [CoachController::class, 'coachwithStudents']);
 
 
+Route::get('/user/{userId}/students', [StudentController::class, 'getStudentsByEnrollment']);
 
+Route::get('/coach/students', [CoachController::class, 'getStudentsForLoggedInCoach']);
 

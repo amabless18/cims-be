@@ -24,7 +24,8 @@ return new class extends Migration
             $table->string('branch')->nullable();
             $table->string('course')->nullable();
             $table->integer('phone')->nullable();
-            $table->enum('status', ['Enrolled', 'pending', 'Graduate'])->nullable();
+            $table->string('status')->nullable()->default('pending');
+            $table->string('coach_name')->nullable();
             $table->date('date_reserved')->nullable();
             $table->rememberToken();
             $table->timestamps();

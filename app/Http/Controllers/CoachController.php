@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Coach;
@@ -9,12 +11,33 @@ use App\Models\Student;
 
 
 class CoachController extends Controller
-{   
-    public function index(){
+{
+    public function index()
+    {
         return response()->json(Coach::all(), 200);
     }
 
-    public function assignStudent(Request $request, $coachId, $studentId) {
+    public function getStudentsForLoggedInCoach()
+    {
+        // Get the currently logged-in coach
+        // Get the current authenticated user's ID
+        $userId = auth()->id();
+
+        // Query the Coach model to find the coach with the current user's ID
+        $coach = Coach::where('user_id', $userId)->first();
+
+        if ($coach) {
+            // If the coach is found, fetch the associated students
+            $students = $coach->students;
+
+            return response()->json($students);
+        } else {
+            return response()->json(['error' => 'No associated students found for the logged-in coach'], 404);
+        }
+    }
+
+    public function assignStudent(Request $request, $coachId, $studentId)
+    {
         $coach = Coach::findOrFail($coachId);
         $student = Student::findOrFail($studentId);
 
@@ -27,7 +50,8 @@ class CoachController extends Controller
         return response()->json($coaches);
     }
 
-    public function coachwithStudents(Coach $coach, $coachId) {
+    public function coachwithStudents(Coach $coach, $coachId)
+    {
         $coach = Coach::findOrFail($coachId);
 
         $coaches = $coach->load('students');
@@ -36,7 +60,7 @@ class CoachController extends Controller
     }
 
 
-    
+
     // public function create(Request $request)
     // {
     //     $branch = new Student();

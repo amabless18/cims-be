@@ -9,8 +9,8 @@ class Coach_Student extends Model
 {
     use HasFactory;
 
-    public function coaches() {
-        return $this->hasOne(Coach::class);
+    public function users() {
+        return $this->hasOne(User::class);
     }
 
 }
