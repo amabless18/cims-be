@@ -16,35 +16,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $users = User::all();
-
-        $bulkData = [];
-
-        User::factory(10)->create();
-
         
-        foreach ($users as $user) {
-            $bulkData[] = [
-                'firstname' => 'Amabless',
-                'lastname' => 'Training Center',
-                'user_id' => $user->id,
-            ];
-        }
 
-        DB::table('students')->insert($bulkData);
-
-
-        //CoachSeeder
-
-        foreach ($users as $user) {
-            $bulkData[] = [
-                'firstname' => 'Amabless',
-                'lastname' => 'Training Center',
-                'user_id' => $user->id,
-            ];
-        }
-
-        DB::table('coaches')->insert($bulkData);
+        DB::table('users')->insert([
+            'name' => 'amabless',
+            'firstname' => 'amabless',
+            'middlename' => 'training',
+            'lastname' => 'center',
+            'email' => 'amabless.training@gmail.com',
+            'password' => Hash::make('123qwe'),
+            'userType' => 'Admin',
+            'status' => 'enrolled'
+        ]);
 
     }
 }
