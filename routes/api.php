@@ -54,6 +54,8 @@ Route::put('updateUser/{id}', [UserController::class,'updateUser']);
 //Delete User Student
 Route::delete('deleteUser/{id}', [UserController::class,'deleteUser']);
 
+
+
 //SCHEDULE
 //Get All Schedules
 Route::get('schedule', [ScheduleController::class,'getSchedule']);
@@ -138,3 +140,10 @@ Route::get('/user/{userId}/students', [StudentController::class, 'getStudentsByE
 
 Route::get('/coach/students', [CoachController::class, 'getStudentsForLoggedInCoach']);
 
+// Route::post('/userstudent', [UserController::class, 'storeStudent']); // Endpoint for creating a new user
+// Route::put('/userstudent/{user}', [UserController::class, 'updateStudent']); // Endpoint for updating an existing user
+// Route::get('/userstudent/{user}', [UserController::class, 'showStudent']); // Endpoint for retrieving user data
+
+// Route::get('/userstudent/{coach}/students', [UserController::class, 'studentsUnderCoach']);
+
+Route::get('/getall/{user}', [UserController::class, 'studentRelationship']);

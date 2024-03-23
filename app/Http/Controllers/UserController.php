@@ -110,4 +110,83 @@ class UserController extends Controller
         $user->delete();
         return response()->json(null, 204);
     }
+
+    // public function storeStudent(Request $request)
+    // {
+    //     $data = $request->validate([
+    //         // Validation rules for your user data
+    //     ]);
+
+    //     // Create the user
+    //     $user = User::create($data);
+
+    //     // Check if the user is a student and coach_id is provided
+    //     if ($user->userType === 'student' && $request->filled('coach_id')) {
+    //         // Get the coach
+    //         $coach = User::find($request->coach_id);
+
+    //         // If coach exists, add the student to the coach's list of students
+    //         if ($coach) {
+    //             $coach->student()->save($user);
+    //         }
+    //     }
+
+    //     $checkCoach = $user->load('student');
+
+    //     return response()->json($checkCoach);
+    // }
+
+    // // Method to update an existing user
+    // public function updateStudent(Request $request, User $user)
+    // {
+    //     $data = $request->validate([
+    //         // Validation rules for your user data
+    //     ]);
+
+    //     $user->update($data);
+
+    //     // Check if the user is a student and coach_id is provided
+    //     if ($user->userType === 'student' && $request->filled('coach_id')) {
+    //         // Get the coach
+    //         $coach = User::find($request->coach_id);
+
+    //         // If coach exists, add the student to the coach's list of students
+    //         if ($coach) {
+    //             $coach->student()->save($user);
+    //         }
+    //     }
+
+    //     $checkCoach = $user->load('student');
+
+    //     return response()->json($checkCoach);
+    // }
+
+    // public function showStudent(User $user)
+    // {
+    //     // Include coach information if necessary
+    //     $userData = $user->toArray();
+
+    //     if ($user->role === 'student' && $user->coach) {
+    //         $userData['coach'] = $user->coach->toArray();
+    //     }
+
+    //     return response($userData, 200);
+    // }
+
+    // public function studentsUnderCoach(User $coach)
+    // {
+    //     // Retrieve the coach's students
+    //     $students = $coach->students()->where('userType', 'student')->get();
+
+    //     return response()->json(['students' => $students]);
+    // }
+
+    public function studentRelationship(User $user) {
+
+        $students = $user->load('student');
+
+        return response()->json($students);
+    }
+
+
 }
