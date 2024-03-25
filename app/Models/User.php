@@ -24,6 +24,7 @@ class User extends Authenticatable
         'email',
         'password',
         'course',
+        'level',
         'branch',
         'coach_id',
         'date_reserved',
