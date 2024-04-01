@@ -73,7 +73,7 @@ Route::put('updateSchedule/{id}', [ScheduleController::class,'updateSchedule']);
 Route::delete('deleteSchedule/{id}', [ScheduleController::class,'deleteSchedule']);
 
 //SOCIAL
-//Get All Socials
+//Get All Socialsr
 Route::get('social', [SocialController::class,'getSocial']);
 
 //Get Specific Social Id
