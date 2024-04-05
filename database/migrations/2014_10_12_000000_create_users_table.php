@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('middlename')->nullable();
             $table->string('lastname')->nullable();
             $table->string('age')->nullable();
-            $table->string('pic')->nullable();
+            $table->longText('pic')->nullable();
             $table->string('session_time')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
