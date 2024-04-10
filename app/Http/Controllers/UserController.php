@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
 class UserController extends Controller
@@ -10,6 +12,43 @@ class UserController extends Controller
     public function getUser()
     {
         return response()->json(User::all(), 200);
+    }
+
+
+    public function updateEmail(Request $request) {
+        // Validate the request data for email update
+        $request->validate([
+            'email' => 'required|email|unique:users,email,' . Auth::id(),
+        ]);
+    
+        // Get the authenticated user
+        $user = Auth::user();
+    
+        // Update Email
+        $user->email = $request->email;
+    
+        // Save changes
+        $user->save();
+    
+        return "Email updated successfully!";
+    }
+    
+    public function updatePassword(Request $request) {
+        // Validate the request data for password update
+        $request->validate([
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+    
+        // Get the authenticated user
+        $user = Auth::user();
+    
+        // Update Password
+        $user->password = Hash::make($request->password);
+    
+        // Save changes
+        $user->save();
+    
+        return "Password updated successfully!";
     }
 
     public function filter(Request $request)

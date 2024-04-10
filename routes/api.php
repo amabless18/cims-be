@@ -147,3 +147,8 @@ Route::get('/coach/students', [CoachController::class, 'getStudentsForLoggedInCo
 // Route::get('/userstudent/{coach}/students', [UserController::class, 'studentsUnderCoach']);
 
 Route::get('/getall/{user}', [UserController::class, 'studentRelationship']);
+
+Route::middleware('auth:api')->group(function () {
+  Route::put('/user/email', [UserController::class, 'updateEmail']);
+  Route::put('/user/password', [UserController::class, 'updatePassword']);
+});
