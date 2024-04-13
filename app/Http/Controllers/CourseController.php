@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\course;
+use App\Models\Course;
 
 class courseController extends Controller
 {   
     public function index(){
-        return response()->json(course::all(), 200);
+        return response()->json(Course::all(), 200);
     }
 
 
@@ -25,7 +25,7 @@ class courseController extends Controller
 
     public function read($id)
     {
-        $course = course::find($id);
+        $course = Course::find($id);
         if (is_null($course)) {
             return response()->json(['message' => 'Course not found'], 404);
         }
@@ -35,7 +35,7 @@ class courseController extends Controller
 
     public function update(Request $request, $id)
     {
-        $course = course::find($id);
+        $course = Course::find($id);
         if (is_null($course)) {
             return response()->json(['message' => 'Course not found'], 404);
         }
@@ -46,7 +46,7 @@ class courseController extends Controller
 
     public function delete($id)
     {
-        $course = course::find($id);
+        $course = Course::find($id);
         if (is_null($course)) {
             return response()->json(['message' => 'Course not found'], 404);
         }
